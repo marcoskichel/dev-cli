@@ -5,12 +5,12 @@ set -euo pipefail
 #   add_worktree.sh <name> [branch]
 #
 # Examples:
-#   add_worktree.sh test           # Creates worktree 'project-name_test' from current branch
-#   add_worktree.sh test main      # Creates worktree 'project-name_test' from main branch
+#   add_worktree.sh test           # Creates worktree 'test' from current branch
+#   add_worktree.sh test main      # Creates worktree 'test' from main branch
 
 if [[ $# -lt 1 ]]; then
 	echo "Usage: $0 <name> [branch]" >&2
-	echo "  Creates a worktree with name format: <project>_<name>" >&2
+	echo "  Creates a worktree with the specified name" >&2
 	exit 1
 fi
 
@@ -27,19 +27,8 @@ fi
 echo "Fetching all remote branches..."
 git fetch --all
 
-# Get the project name from the git remote URL
-REMOTE_URL="$(git remote get-url origin 2>/dev/null || echo "")"
-if [[ -z "${REMOTE_URL}" ]]; then
-	echo "Error: No origin remote found" >&2
-	exit 1
-fi
-
-# Extract project name from URL
-# Handle both SSH (git@github.com:user/repo.git) and HTTPS (https://github.com/user/repo.git) formats
-PROJECT_NAME="$(basename "${REMOTE_URL}" .git)"
-
-WORKTREE_NAME="${PROJECT_NAME}_${NAME}"
-NEW_BRANCH="${WORKTREE_NAME}"
+WORKTREE_NAME="${NAME}"
+NEW_BRANCH="${NAME}"
 
 # Determine base branch
 if [[ -n "${BRANCH}" ]]; then

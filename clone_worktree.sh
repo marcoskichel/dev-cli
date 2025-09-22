@@ -38,7 +38,7 @@ mkdir -p "${DIR_NAME}"
 cd "${DIR_NAME}"
 
 echo "Cloning bare repo into .bare (only branch ${BRANCH}) ..."
-git clone --bare --single-branch --branch "${BRANCH}" "${REPO_URL}" .bare
+git clone --bare --branch "${BRANCH}" "${REPO_URL}" .bare
 
 # Point the working directory at the bare repo
 echo "gitdir: ./.bare" >.git
