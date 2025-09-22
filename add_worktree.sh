@@ -23,6 +23,10 @@ if ! git rev-parse --git-dir >/dev/null 2>&1; then
 	exit 1
 fi
 
+# Fetch all remote branches to ensure they're available locally
+echo "Fetching all remote branches..."
+git fetch --all
+
 # Get the project name from the git remote URL
 REMOTE_URL="$(git remote get-url origin 2>/dev/null || echo "")"
 if [[ -z "${REMOTE_URL}" ]]; then
