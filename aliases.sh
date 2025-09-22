@@ -22,3 +22,6 @@ alias gcw=git-clone-worktree
 
 alias git-add-worktree=add_worktree.sh
 alias gaw=git-add-worktree
+
+alias copy-master-config-files=copy_master_config_files.sh
+alias cmcf=copy-master-config-files
